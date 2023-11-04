@@ -30,6 +30,7 @@ def main():
         'InvoiceNo': 'count',       
         'TotalAmount': 'sum' 
     }).reset_index()
+    print("rfm")
 
     str_df=df[['Description', 'Country','CustomerID']]
 
