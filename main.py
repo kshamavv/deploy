@@ -4,10 +4,11 @@ import numpy as np
 import os 
 from flask import Flask
 from google.cloud import storage
+
 app = Flask(__name__)
 
 @app.route('/',methods=["GET"])
-def main():
+def rfm_func():
 
     storage_client = storage.Client()
     bucket_name = 'appdeployee'
@@ -18,6 +19,7 @@ def main():
     blob = bucket.blob(file_name)
     blob.download_to_filename(file_name)
     df = pd.read_csv(file_name)
+    print(len(df))
 
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
     df['TotalAmount'] = df['Quantity'] * df['UnitPrice']
@@ -57,11 +59,13 @@ def main():
     rfm['CustomerID'] =rfm['CustomerID'].astype("int64")
 
     final_df= rfm.merge(str_df,on='CustomerID',how='inner')
+
     return "Rfm analysis completed"
 if __name__ == "__main__":
     app.debug = True
     app.host='0.0.0.0'
     app.port=int(os.environ.get('PORT', 8080))
     app.run()
-    # app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host="127.0.0.1", port=8080, debug=True)
+    # app.run(debug=True,host="0.0.0.0", port=8080)
 # print("RFM analysis is completed")
