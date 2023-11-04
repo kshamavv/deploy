@@ -4,10 +4,11 @@ import numpy as np
 import os 
 from flask import Flask
 from google.cloud import storage
+
 app = Flask(__name__)
 
 @app.route('/',methods=["GET"])
-def main():
+def rfm_func():
 
     storage_client = storage.Client()
     bucket_name = 'appdeployee'
@@ -57,11 +58,11 @@ def main():
     rfm['CustomerID'] =rfm['CustomerID'].astype("int64")
 
     final_df= rfm.merge(str_df,on='CustomerID',how='inner')
+
     return "Rfm analysis completed"
 if __name__ == "__main__":
     # app.debug = True
     # app.host='0.0.0.0'
     # app.port=int(os.environ.get('PORT', 8080))
     # app.run()
-    app.run(host="127.0.0.1", port=8080, debug=True)
-# print("RFM analysis is completed")
+    app.run(debug=True,host="0.0.0.0", port=8080)
