@@ -19,6 +19,7 @@ def rfm_func():
     blob = bucket.blob(file_name)
     blob.download_to_filename(file_name)
     df = pd.read_csv(file_name)
+    print(len(df))
 
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
     df['TotalAmount'] = df['Quantity'] * df['UnitPrice']
