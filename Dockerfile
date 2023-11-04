@@ -18,5 +18,5 @@ RUN pip install -r /app/requirements.txt
 EXPOSE 8080
 
 # Specify the command to run your application
-CMD exec gunicorn --bind :8080
+CMD exec gunicorn --bind :8080 main:app
 
