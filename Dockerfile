@@ -8,8 +8,8 @@ WORKDIR /app
 COPY . /app
 
 # Install any necessary Python dependencies from a requirements file (if needed)
-# COPY requirements.txt /app/requirements.txt
-# RUN pip install -r /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # Define any environment variables if required
 # ENV MY_ENV_VAR=value
