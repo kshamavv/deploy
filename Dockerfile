@@ -15,7 +15,7 @@ RUN pip install -r /app/requirements.txt
 # ENV MY_ENV_VAR=value
 
 # Expose any necessary ports if your application listens on a specific port
-# EXPOSE 8080
+EXPOSE 8080
 
 # Specify the command to run your application
 CMD ["python", "main.py"]
