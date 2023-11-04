@@ -18,5 +18,5 @@ RUN pip install -r /app/requirements.txt
 EXPOSE 8080
 
 # Specify the command to run your application
-CMD exec uvicorn routes:app --host 0.0.0.0 --port 8080
+CMD exec gunicorn --bind :8080
 
