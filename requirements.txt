@@ -1,4 +1,6 @@
 pandas
 numpy
+Flask
+gunicorn
 google-cloud-storage
 
