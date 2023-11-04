@@ -44,7 +44,7 @@ def main():
         elif x <= d[p][0.75]:
             return 2
         else:
-            return 1
+            return 16
         
 
     rfm['R_Score'] = rfm['Recency'].apply(rfm_score, args=('Recency', quantiles))
@@ -59,9 +59,9 @@ def main():
     final_df= rfm.merge(str_df,on='CustomerID',how='inner')
     return "Rfm analysis completed"
 if __name__ == "__main__":
-    # app.debug = True
-    # app.host='0.0.0.0'
-    # app.port=int(os.environ.get('PORT', 8080))
-    # app.run()
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.debug = True
+    app.host='0.0.0.0'
+    app.port=int(os.environ.get('PORT', 8080))
+    app.run()
+    # app.run(host="127.0.0.1", port=8080, debug=True)
 # print("RFM analysis is completed")
