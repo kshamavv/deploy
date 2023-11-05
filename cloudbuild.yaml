@@ -1,7 +1,7 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/prj-gradient-kshama/python-repo/my-app:latest', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/prj-gradient-kshama/python-repo/my-apps:latest', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/prj-gradient-kshama/python-repo/my-app:latest']
+    args: ['push', 'us-central1-docker.pkg.dev/prj-gradient-kshama/python-repo/my-apps:latest']
 images:
   - 'us-central1-docker.pkg.dev/prj-gradient-kshama/python-repo/my-app:latest'
