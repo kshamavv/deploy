@@ -67,12 +67,12 @@ def rfm_func():
     job_config = bigquery.LoadJobConfig(
         schema=[
             bigquery.SchemaField("No","INT64"),
-            bigquery.SchemaField("Unnamed","INT64"),
+            # bigquery.SchemaField("Unnamed","INT64"),
             bigquery.SchemaField("CustomerID", "INT64"),
             bigquery.SchemaField("UnitPrice", "FLOAT64"),
             bigquery.SchemaField("InvoiceDate", "STRING"),
-        bigquery.SchemaField("InvoiceNo", "INT64"),
         bigquery.SchemaField("Recency","INT64"),
+        bigquery.SchemaField("InvoiceNo", "INT64"),
         bigquery.SchemaField("TotalAmount", "FLOAT64"),
         bigquery.SchemaField("R_Score", "INT64"),
         bigquery.SchemaField("F_Score", "INT64"),
