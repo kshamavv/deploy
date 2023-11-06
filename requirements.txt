@@ -3,4 +3,4 @@ numpy
 Flask
 gunicorn
 google-cloud-storage
-
+google-cloud-bigquery
