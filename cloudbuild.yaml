@@ -20,6 +20,6 @@ steps:
       - 'managed'
       - '--region'
       - 'us-central1'
-  logsBucket: 'gs://practiceek'
-  options:
+logsBucket: 'gs://practiceek'
+options:
  logging: GCS_ONLY
