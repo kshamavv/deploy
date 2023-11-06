@@ -13,7 +13,7 @@ def rfm_func():
 
     storage_client = storage.Client()
     bucket_name = 'appdeployee'
-    file_name = 'updated.csv'
+    file_name = 'rfm - online_retail (2).csv'
 
 
     bucket = storage_client.bucket(bucket_name)
