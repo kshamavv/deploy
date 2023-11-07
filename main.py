@@ -14,7 +14,7 @@ def rfm_func():
 
     storage_client = storage.Client()
     bucket_name = 'appdeployee'
-    file_name = 'rfm - online_retail (2).csv'
+    file_name = 'online_retail.csv'
 
 
     bucket = storage_client.bucket(bucket_name)
@@ -43,7 +43,7 @@ def rfm_func():
     rfm['RFM_Score'] = rfm['R_Score'] + rfm['F_Score'] + rfm['M_Score']
     # Merge with customer description and country
     rfm_df = rfm.merge(df[['Description', 'Country','CustomerID']], on='CustomerID', how='inner')
-    bigquery.Client().load_table_from_dataframe(rfm_df, 'prj-gradient-kshama.updated', if_exists='replace')
+    bigquery.Client().load_table_from_dataframe(rfm_df, 'prj-gradient-kshama.kshama.result', if_exists='replace')
 
     return "Rfm analysis completed"
 
