@@ -12,15 +12,15 @@ app = Flask(__name__)
 @app.route('/',methods=["GET"])
 def rfm_func():
 
-    storage_client = storage.Client()
-    bucket_name = 'appdeployee'
-    file_name = 'online_retail.csv'
+    # storage_client = storage.Client()
+    # bucket_name = 'appdeployee'
+    # file_name = 'online_retail.csv'
 
 
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(file_name)
-    blob.download_to_filename(file_name)
-    df = pd.read_csv(file_name)
+    # bucket = storage_client.bucket(bucket_name)
+    # blob = bucket.blob(file_name)
+    # blob.download_to_filename(file_name)
+    df = pd.read_csv('gs://appdeployee/online_retail.csv')
     # Calculate RFM metrics
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
     df['TotalAmount'] = df['Quantity'] * df['UnitPrice']
