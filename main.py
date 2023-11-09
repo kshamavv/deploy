@@ -20,7 +20,7 @@ def rfm_func():
     # bucket = storage_client.bucket(bucket_name)
     # blob = bucket.blob(file_name)
     # blob.download_to_filename(file_name)
-    df = pd.read_csv('C:\Users\kshgo\Downloads\online_retail.csv.zip\online_retail.csv')
+    df = pd.read_csv('gs://appdeployee/online_retail.csv')
     # Calculate RFM metrics
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
     df['TotalAmount'] = df['Quantity'] * df['UnitPrice']
