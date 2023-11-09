@@ -20,7 +20,7 @@ def rfm_func():
     # bucket = storage_client.bucket(bucket_name)
     # blob = bucket.blob(file_name)
     # blob.download_to_filename(file_name)
-    df = pd.read_csv('gs://appdeployee/online_retail.csv')
+    df = pd.read_csv('C:\Users\kshgo\Downloads\online_retail.csv.zip\online_retail.csv')
     # Calculate RFM metrics
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
     df['TotalAmount'] = df['Quantity'] * df['UnitPrice']
@@ -31,20 +31,30 @@ def rfm_func():
         'InvoiceNo': 'count',
         'TotalAmount': 'sum'
     }).reset_index()
-
-    # Calculate RFM scores
     quantiles = rfm.quantile(q=[0.25, 0.50, 0.75,])
-    rfm['R_Score'] = rfm['Recency'].apply(lambda x: 4 if x <= quantiles['Recency'][0.25] else 3 if x <= quantiles['Recency'][0.50] else 2 if x <= quantiles['Recency'][0.75] else 1)
-    rfm['F_Score'] = rfm['InvoiceNo'].apply(lambda x: 4 if x <= quantiles['InvoiceNo'][0.25] else 3 if x <= quantiles['InvoiceNo'][0.50] else 2 if x <= quantiles['InvoiceNo'][0.75] else 1)
-    rfm['M_Score'] = rfm['TotalAmount'].apply(lambda x: 4 if x <= quantiles['TotalAmount'][0.25] else 3 if x <= quantiles['TotalAmount'][0.50] else 2 if x <= quantiles['TotalAmount'][0.75] else 1)
 
-    # Calculate RFM Group and RFM Score
+    def rfm_score(x, p, d): 
+        if x <= d[p][0.25]:
+            return 4
+        elif x <= d[p][0.50]:
+            return 3
+        elif x <= d[p][0.75]:
+            return 2
+        else:
+            return 1
+    
+
+    rfm['R_Score'] = rfm['Recency'].apply(rfm_score, args=('Recency', quantiles))
+    rfm['F_Score'] = rfm['InvoiceNo'].apply(rfm_score, args=('InvoiceNo', quantiles))
+    rfm['M_Score'] = rfm['TotalAmount'].apply(rfm_score, args=('TotalAmount', quantiles))
+
     rfm['RFM_Group'] = rfm['R_Score'].astype(str) + rfm['F_Score'].astype(str) + rfm['M_Score'].astype(str)
     rfm['RFM_Score'] = rfm['R_Score'] + rfm['F_Score'] + rfm['M_Score']
     # Merge with customer description and country
     # rfm_df = rfm.merge(df[['Description', 'Country','CustomerID']], on='CustomerID', how='inner')
-    # bigquery.Client().load_table_from_dataframe(rfm_df, 'prj-gradient-kshama.kshama.result', if_exists='replace')
-
+    combined_df = pd.concat([df[['CustomerID', 'Description']],rfm], axis=1)
+    bigquery.Client().load_table_from_dataframe(combined_df, 'prj-gradient-kshama.kshama.result')
+    
     return "Rfm analysis completed"
 
 if __name__ == "__main__":
