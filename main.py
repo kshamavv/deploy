@@ -54,7 +54,7 @@ def rfm_func():
     # Merge with customer description and country
     # rfm_df = rfm.merge(df[['Description', 'Country','CustomerID']], on='CustomerID', how='inner')
     combined_df = pd.concat([df[['CustomerID', 'Description']],rfm], axis=1)
-    bigquery.Client().load_table_from_dataframe(combined_df, 'prj-gradient-kshama.kshama.result')
+    combined_df.to_gbq("prj-gradient-kshama.kshama.result", "prj-gradient-kshama")
     
     return "Rfm analysis completed"
 
