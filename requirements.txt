@@ -5,3 +5,4 @@ gunicorn
 google-cloud-storage
 google-cloud-bigquery
 pandas-gbq
+fsspec
