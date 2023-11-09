@@ -42,8 +42,8 @@ def rfm_func():
     rfm['RFM_Group'] = rfm['R_Score'].astype(str) + rfm['F_Score'].astype(str) + rfm['M_Score'].astype(str)
     rfm['RFM_Score'] = rfm['R_Score'] + rfm['F_Score'] + rfm['M_Score']
     # Merge with customer description and country
-    rfm_df = rfm.merge(df[['Description', 'Country','CustomerID']], on='CustomerID', how='inner')
-    bigquery.Client().load_table_from_dataframe(rfm_df, 'prj-gradient-kshama.kshama.result', if_exists='replace')
+    # rfm_df = rfm.merge(df[['Description', 'Country','CustomerID']], on='CustomerID', how='inner')
+    # bigquery.Client().load_table_from_dataframe(rfm_df, 'prj-gradient-kshama.kshama.result', if_exists='replace')
 
     return "Rfm analysis completed"
 
